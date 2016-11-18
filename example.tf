@@ -9,7 +9,7 @@ resource "aws_instance" "example" {
     ami           = "ami-408c7f28"
     instance_type = "t1.micro"
     tags {
-	# how to create unique tags?
-        Name      = "${count}"
+        Name      = "aws_instance.example.${count.index}"
     }
 }
+
