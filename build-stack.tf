@@ -9,7 +9,7 @@ provider "aws" {
 
 resource "aws_instance" "example" {
     count          = 1
-    ami            = "ami-656be372"
+    ami            = "${lookup(var.amis, var.region)}"
     instance_type  = "t1.micro"
 
     provisioner "local-exec" {
@@ -20,13 +20,6 @@ resource "aws_instance" "example" {
         /* CreateDate = "${create_date}" */
     }
 }
-
-/*
-resource "aws_instance" "another" {
-    ami = "ami-13be557e"
-    instance_type = "t1.micro"
-}
-*/
 
 resource "aws_eip" "ip" {
     /* interpolation example */
