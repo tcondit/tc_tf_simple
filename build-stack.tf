@@ -5,7 +5,7 @@ provider "aws" {
 
 resource "aws_instance" "example" {
     count          = 2
-    ami            = "ami-408c7f28"
+    ami            = "ami-656be372"
     instance_type  = "t1.micro"
     tags {
         Name       = "aws_instance.example.${count.index}"
