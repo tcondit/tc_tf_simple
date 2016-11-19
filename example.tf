@@ -1,8 +1,4 @@
 provider "aws" {
-/*
-    access_key = "AKIAJTCJJCNRMEPUG7QQ"
-    secret_key = "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"
-*/
     region                  = "us-east-1"
     shared_credentials_file = "/Users/izz731/.aws-personal/credentials"
 }
