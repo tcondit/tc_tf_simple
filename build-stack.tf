@@ -1,15 +1,34 @@
+/* build-stack.tf */
+
 provider "aws" {
-    region                  = "us-east-1"
-    shared_credentials_file = "/Users/izz731/.aws-personal/credentials"
+    region     = "${var.region}"
+    access_key = "${var.access_key}"
+    secret_key = "${var.secret_key}"
+    /* shared_credentials_file = "/Users/izz731/.aws-personal/credentials" */
 }
 
 resource "aws_instance" "example" {
-    count          = 2
+    count          = 1
     ami            = "ami-656be372"
     instance_type  = "t1.micro"
+
+    provisioner "local-exec" {
+        command = "echo ${aws_instance.example.public_ip} > ip_address.txt"
+    }
     tags {
-        Name       = "aws_instance.example.${count.index}"
+        Name = "aws_instance.example.${count.index}"
         /* CreateDate = "${create_date}" */
     }
 }
 
+/*
+resource "aws_instance" "another" {
+    ami = "ami-13be557e"
+    instance_type = "t1.micro"
+}
+*/
+
+resource "aws_eip" "ip" {
+    /* interpolation example */
+    instance = "${aws_instance.example.id}"
+}
