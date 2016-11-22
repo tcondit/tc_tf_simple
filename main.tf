@@ -1,10 +1,9 @@
-/* build-stack.tf */
+# main.tf
 
 provider "aws" {
     region     = "${var.region}"
     access_key = "${var.access_key}"
     secret_key = "${var.secret_key}"
-    /* shared_credentials_file = "/Users/izz731/.aws-personal/credentials" */
 }
 
 resource "aws_instance" "example" {
@@ -17,12 +16,11 @@ resource "aws_instance" "example" {
     }
     tags {
         Name = "aws_instance.example.${count.index}"
-        /* CreateDate = "${create_date}" */
+        # CreateDate = "${create_date}"
     }
 }
 
 resource "aws_eip" "ip" {
-    /* interpolation example */
     instance = "${aws_instance.example.id}"
 }
 
