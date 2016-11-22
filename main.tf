@@ -11,7 +11,12 @@ resource "aws_instance" "example" {
     ami            = "${lookup(var.amis, var.region)}"
     instance_type  = "t2.micro"
 
+    key_name = "${var.key_name}"
+
+    # security_groups = "${aws_security_group.allow_ssh.name}"
+
     provisioner "local-exec" {
+        # TODO create output.tf instead
         command = "echo ${aws_instance.example.public_ip} > ip_address.txt"
     }
     tags {
